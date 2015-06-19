@@ -1,0 +1,53 @@
+.jumbotron{
+	background-color: #fdf8e1; 
+	border: 1px solid #f2cb3b;
+	h2{
+		color:#c41204;
+		font-weight: bolder;
+	}
+}
+.navbar-default{
+	.container-fluid{
+		background-color: #bb0d03;
+		.navbar-nav > li > a{
+			color:#fff;
+			font-size:16px;
+			font-weight: bold;
+		}
+		.navbar-brand{
+			color:black;
+			font-size: 30px;
+			font-weight: bold;
+			font-family: 'Hobo Std';
+			text-shadow: 2px 00 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+		}
+	}
+}
+
+footer{
+	height: 100%;
+  width: 100%;
+  color: #0E7480;
+  margin-top: 40px;
+  bottom: 0;
+  left: 0;
+  background-image: url('https://s3.amazonaws.com/foodplace/uploads/food_place/image/img/food-f.png') repeat center center fixed,
+  -webkit-background-size cover,
+  -moz-background-size cover,
+  -o-background-size cover,
+  background-size cover;
+  overflow: hidden;
+	.footer{
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		p{
+			color: green;
+			padding: 10px 0;
+
+		}
+	}
+}
+// .container-fluid{
+// 	padding: 3px 20px
+// }
