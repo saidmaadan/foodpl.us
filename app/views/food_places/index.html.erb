@@ -21,7 +21,7 @@
         <td><%= food_place.name %></td>
         <td><%= food_place.address %></td>
         <td><%= food_place.phone %></td>
-        <td><%= food_place.website %></td>
+        <td><%= link_to food_place.website, food_place.website, target:'_blank' %></td>
         <td><%= link_to 'Show', food_place, class: "btn btn-link" %></td>
         <td><%= link_to 'Edit', edit_food_place_path(food_place), class: "btn btn-link" %></td>
         <td><%= link_to 'Destroy', food_place, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></td>
