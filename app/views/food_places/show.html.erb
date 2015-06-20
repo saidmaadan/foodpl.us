@@ -27,7 +27,7 @@
  		<h3>No reviews yet. Be the first to review this food place</h3>
  <% else %>
  		<% @reviews.each do |r| %>
-		 <p><%= r.rating %></p>
+		 <div class='star-rating' data-score= <%= r.rating %> ></div>
 		 <p><%= r.comment %></p>
 		<% end %>
 	<% end %>
@@ -37,3 +37,12 @@
 
 <%= link_to 'Edit', edit_food_place_path(@food_place), class: "btn btn-link" %> |
 <%= link_to 'Back', food_places_path, class: "btn btn-link" %>
+<script>
+	$('.star-rating').raty({
+		path: 'https://s3.amazonaws.com/foodplace/uploads/stars',
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+		}
+	});
+</script>
