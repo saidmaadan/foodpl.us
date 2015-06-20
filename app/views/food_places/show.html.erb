@@ -30,11 +30,22 @@
  		<h3>No reviews yet. Be the first to review this food place</h3>
  <% else %>
 	 <table class="table">
+	 <thead>
+	 	<tr>
+	 		<th class='col-md-3'></th>
+	 		<th class='col-md-3'></th>
+	 	</tr>
+	 </thead>
 		 <tbody>
 		 	<% @reviews.each do |r| %>
 		 
 			 <tr>
 			 	<td>
+			 		<h4><%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%>
+			 		</h4>
+			 		<p><%= r.created_at.strftime("%-m/%-d/%y") %></p>
+			 		</td>
+			 		<td>
 			 		<div class='star-rating' data-score= <%= r.rating %> ></div>
 					 <p><%= h(r.comment).gsub(/\n/, '<br/>').html_safe %></p>
 			 	</td>
