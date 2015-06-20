@@ -1,72 +1,88 @@
 <div class='row'>
- <div class='col-md-3'>
-	 	<%= image_tag @food_place.image_url %>
-	<h2>
-	 
-	  <%= @food_place.name %>
-	</h2>
+	<div class='col-md-7 col-sm-8'>
+	 	<div class='row'>
+			<div class='col-md-5 col-sm-6 hidden-xs'>	
+				 	<%= image_tag @food_place.image_url %>
+			</div>
+			<div class='col-md-7 col-sm-6'>
+				<h2><%= @food_place.name %></h2>
+				<div class='star-rating' data-score= <%= @avg_rating %> ></div>
+				<p><%= "#{@reviews.length} reviews"%></p>
+				<p>
+				  <strong>Address:</strong>
+				  <%= @food_place.address %>
+				</p>
+				<p>
+				  <strong>Phone:</strong>
+				  <%= @food_place.phone %>
+			</p>
+			<p>
+			  <strong>Website:</strong>
+			  <%= link_to @food_place.website, @food_place.website, target:'_blank'%>
+			</p>
+			
+			</div>
+		</div>
+		<p>
+				  <%= @food_place.about %>
+			</p>
+			<% if user_signed_in? %>
+				<% if (@food_place.user == current_user) || (current_user.admin?)%>
+					<%= link_to 'Edit', edit_food_place_path(@food_place), class: "btn btn-link" %> |
+					<%= link_to "Delete", food_place_path(@food_place), method: :delete, data: { confirm: 'Are you sure?' }%>
+				<% end %>
+	 		<% end %>
+	 		<%= link_to "Write a Review", new_food_place_review_path(@food_place), class: 'btn btn-primary' %>
+	</div>
 
-	<div class='star-rating' data-score= <%= @avg_rating %> ></div>
-	<p><%= "#{@reviews.length} reviews"%></p>
+	<div class='col-md-5 col-sm-4'>
+		<iframe
+			width="100%"
+			height="300"
+			frameborder="0" style="border:0"
+			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBB2gFnX3mWZNOINgVNx7lqId-Wn8sAnWY
+			  &q=<%= @food_place.address.parameterize %>">
+		</iframe>	
+	</div>
+</div>
 
-	<p>
-	  <strong>Address:</strong>
-	  <%= @food_place.address %>
-	</p>
-
-	<p>
-	  <strong>Phone:</strong>
-	  <%= @food_place.phone %>
-	</p>
-
-	<p>
-	  <strong>Website:</strong>
-	  <%= link_to @food_place.website, @food_place.website, target:'_blank' %>
-	</p>
-	<%= link_to "Write a Review", new_food_place_review_path(@food_place), class: 'btn btn-primary' %>
- </div>
- <div class='col-md-9'>
- <% if @reviews.blank? %>
- 		<h3>No reviews yet. Be the first to review this food place</h3>
- <% else %>
-	 <table class="table">
-	 <thead>
-	 	<tr>
-	 		<th class='col-md-3'></th>
-	 		<th class='col-md-3'></th>
-	 	</tr>
-	 </thead>
-		 <tbody>
-		 	<% @reviews.each do |r| %>
-		 
-			 <tr>
-			 	<td>
-			 		<h4><%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%>
-			 		</h4>
-			 		<p><%= r.created_at.strftime("%-m/%-d/%y") %></p>
-			 		</td>
-			 		<td>
-			 		<div class='star-rating' data-score= <%= r.rating %> ></div>
+<br><hr><br>
+ <div class="row">
+  <div class='col-sm-12'>
+		<% if @reviews.blank? %>
+ 			<h3>No reviews yet. Be the first to review this food place</h3>
+ 		<% else %>
+ 			<% @reviews.in_groups_of(2) do |group| %>
+ 				<div class="row">
+        <% group.each do |r| %>
+          <% if r %>
+          	<div class='col-sm-6'>
+          	<h4>Reviewed By: <%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%> on this day <%= r.created_at.strftime("%-m/%-d/%y") %>
+			 			</h4>
+			 			<div class='star-rating' data-score= <%= r.rating %> ></div>
 					 <p><%= h(r.comment).gsub(/\n/, '<br/>').html_safe %></p>
 
 					 <% if user_signed_in? %>
 					 	<% if (r.user == current_user) || (current_user.admin?)%>
 					 	<%= link_to "Edit", edit_food_place_review_path(@food_place, r) %>
-					 	<%= link_to "Delete", food_place_review_path(@food_place, r), method: :delete %>
+					 	<%= link_to "Delete", food_place_review_path(@food_place, r), method: :delete, data: { confirm: 'Are you sure?' }%>
 					 	<% end %>
 					 	<% end %>
-			 	</td>
-			 </tr>
-			 <% end %>
-		</tbody>
-	 </table> 
-	<% end %>
+					 		<hr>
+			 			</div>
+			 		<% end %>
+			 	<% end %>
+			 	</div>
+			<% end %>
+ 		<% end %>
+ 	</div>
  </div>
-</div>
+
+  
+    
 
 
-<%= link_to 'Edit', edit_food_place_path(@food_place), class: "btn btn-link" %> |
-<%= link_to 'Back', food_places_path, class: "btn btn-link" %>
+
 <script>
 	$('.star-rating').raty({
 		path: 'https://s3.amazonaws.com/foodplace/uploads/stars',

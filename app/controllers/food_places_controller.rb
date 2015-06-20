@@ -1,7 +1,7 @@
 class FoodPlacesController < ApplicationController
   before_action :set_food_place, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_user, except: [:index, :show]
+  before_action :authenticate_user!
+  before_action :check_user, only: [:edit, :update, :destroy]
   # GET /food_places
   # GET /food_places.json
   def index
@@ -32,7 +32,7 @@ class FoodPlacesController < ApplicationController
   # POST /food_places.json
   def create
     @food_place = FoodPlace.new(food_place_params)
-
+    @food_place.user_id = current_user.id
     respond_to do |format|
       if @food_place.save
         format.html { redirect_to @food_place, notice: 'Food place was successfully created.' }
@@ -75,13 +75,21 @@ class FoodPlacesController < ApplicationController
     end
 
     def check_user
-      unless current_user.admin?
-        redirect_to root_url, alert: "Sorry, You are not authorized"
+      unless (@food_place.user == current_user) || (current_user.admin?)
+        redirect_to root_url, alert: "Sorry, this listing belongs to someone else"
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def food_place_params
-      params.require(:food_place).permit(:name, :address, :phone, :website, :image)
+      params.require(:food_place).permit(:name, :address, :phone, :website, :about, :image)
     end
 end
+
+# def check_user
+#       unless current_user.admin?
+#         redirect_to root_url, alert: "Sorry, You are not authorized"
+#       end
+#     end
+# , except: [:index, :show]
+# except: [:index, :show]
