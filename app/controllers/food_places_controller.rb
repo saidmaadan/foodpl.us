@@ -1,7 +1,16 @@
 class FoodPlacesController < ApplicationController
   before_action :set_food_place, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:search, :index, :show]
   before_action :check_user, only: [:edit, :update, :destroy]
+ 
+  def search
+    if params[:search].present?
+      @food_places = FoodPlace.search(params[:search])
+    else
+      @food_places = FoodPlace.all 
+    end
+  end
+
   # GET /food_places
   # GET /food_places.json
   def index

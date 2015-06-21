@@ -1,9 +1,13 @@
 class FoodPlace < ActiveRecord::Base
 	mount_uploader :image, ImageUploader
 
+	searchkick
+	
+
 	belongs_to :user
 	has_many :reviews
 	validates :name, :address, :phone, :website, :image, presence: true
+	validates :about, presence: true, length: { minimum: 25 }
 	validates :phone, format: { with: /\A\(\d{3}\) \d{3}-\d{4}\z/,
     message: "number must be in this format (123) 456-7890" }
     validates :website, format: { with: /\Ahttps?:\/\/.*\z/,
