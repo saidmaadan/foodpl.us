@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   get 'pages/about'
-
+  
   get 'pages/contact'
   root 'food_places#index'
 

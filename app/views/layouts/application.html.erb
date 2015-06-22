@@ -11,7 +11,7 @@
 <body>
 <%= render 'layouts/navbar'%>
 <section class='section'>
-<div class='container'>
+
 	<% flash.each do |name, msg| %>
 		<% if msg.is_a?(String) %>
 			<div class="alert alert-<%= name = "notice" ? "success" : "danger" %> alert-dismissable">
@@ -22,7 +22,6 @@
 	<% end %>
 	
 	<%= yield %>
-</div>
 </section>
 <%= render 'layouts/footer'%>
 

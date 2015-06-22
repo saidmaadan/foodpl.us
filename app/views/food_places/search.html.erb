@@ -1,29 +1,56 @@
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th>Website</th>
-      <% if user_signed_in? && current_user.admin? %>
-        <th colspan="2"></th>
-      <% end %>
-    </tr>
-  </thead>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-9 col-sm-8 clearfix'>
+      <% @food_places.in_groups_of(1) do |group| %>
+        <div class="row">
+          <% group.each do |food_place| %>
+            <% if food_place %>
+              <div class='col-sm-12'>
+                <div class='row'>
+                  <div class='col-sm-3 hidden-xs'>
+                    <%= image_tag food_place.image_url, class: 'img-responsive', style:"width:100%;height:200px" %>
+                  </div>
+                  <div class='col-sm-9'>
+                    <h2><%= link_to food_place.name, food_place %></h2>
+                    <div class='star-rating' data-score= <%= @avg_rating %> ></div>
+                    <p><%= pluralize("#{food_place.reviews.length}", "review") %></p>
+                    <p>
+                      <%= truncate(food_place.about, length:160, seperator: '') %><br>
+                      <%= link_to food_place.website, food_place.website, target:'_blank'%>
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-  <tbody>
-    <% @food_places.each do |food_place| %>
-      <tr>
-        <td><%= link_to food_place.name, food_place %></td>
-        <td><%= food_place.address %></td>
-        <td><%= food_place.phone %></td>
-        <td><%= link_to food_place.website, food_place.website, target:'_blank' %></td>
-        <!-- -->
-        <% if user_signed_in? && current_user.admin? %>
-          <td><%= link_to 'Edit', edit_food_place_path(food_place), class: "btn btn-link" %></td>
-          <td><%= link_to 'Destroy', food_place, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class='paginate'>
+      <%= paginate @food_places, :outer_window => 3 %>
+      </div>
+    </div>
+    <div class='col-md-3 col-sm-4 clearfix'>
+       <h2>Review of the Day</h2>
+           <% @reviews.each do |r| %>
+             <h5><%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%> reviewed <%= link_to r.food_place.name, r.food_place %></h5>
+              <%= r.created_at.strftime("%-m/%-d/%y") %><br>
+              <div class='star-rating' data-score= <%= r.rating %> ></div>      
+             <p><%= h(r.comment).gsub(/\n/, '<br/>').html_safe %></p>
+           <% end %>
+       <hr>
+     </div>  
+  </div>
+  
+</div>
+
+
+<script>
+  $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/foodplace/uploads/stars',
+    readOnly: true,
+    score: function(){
+      return $(this).attr('data-score');
+    }
+  });
+</script>

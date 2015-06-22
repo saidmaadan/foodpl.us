@@ -2,7 +2,8 @@ class FoodPlace < ActiveRecord::Base
 	mount_uploader :image, ImageUploader
 
 	searchkick
-	
+	paginates_per 4
+	max_paginates_per 4
 
 	belongs_to :user
 	has_many :reviews

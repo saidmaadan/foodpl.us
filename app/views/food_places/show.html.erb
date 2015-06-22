@@ -1,88 +1,103 @@
-<div class='row'>
-	<div class='col-md-7 col-sm-8'>
-	 	<div class='row'>
-			<div class='col-sm-5 hidden-xs'>	
-				 	<%= image_tag @food_place.image_url, class: 'img-responsive',style:"width:100%;" %>
-			</div>
-			<div class='col-sm-7'>
-				<h2><%= @food_place.name %></h2>
-				<div class='star-rating' data-score= <%= @avg_rating %> ></div>
-				<p><%= "#{@reviews.length} reviews"%></p>
-				<p>
-				  <strong>Address:</strong>
-				  <%= @food_place.address %>
+<div class='container'>
+	<div class='row'>
+		<div class='col-md-7 col-sm-8'>
+		 	<div class='row'>
+				<div class='col-sm-5 hidden-xs'>	
+					 	<%= image_tag @food_place.image_url, class: 'img-responsive',style:"width:100%;" %>
+				</div>
+				<div class='col-sm-7'>
+					<h2><%= @food_place.name %></h2>
+					<div class='star-rating' data-score= <%= @avg_rating %> ></div>
+					<p><%= pluralize("#{@reviews.length}", "review") %></p>
+					<p>
+					  <strong>Address:</strong>
+					  <%= @food_place.address %>
+					</p>
+					<p>
+					  <strong>Phone:</strong>
+					  <%= @food_place.phone %>
 				</p>
 				<p>
-				  <strong>Phone:</strong>
-				  <%= @food_place.phone %>
-			</p>
-			<p>
-			  <strong>Website:</strong>
-			  <%= link_to @food_place.website, @food_place.website, target:'_blank'%>
-			</p>
-			
+				  <strong>Website:</strong>
+				  <%= link_to @food_place.website, @food_place.website, target:'_blank'%>
+				</p>
+				
+				</div>
 			</div>
+			<p>
+					  <%= @food_place.about %>
+				</p>
+				<p class='pull-right'>
+				<% if user_signed_in? %>
+					<% if (@food_place.user == current_user) || (current_user.admin?)%>
+						<%= link_to 'Edit', edit_food_place_path(@food_place), class: "btn btn-info" %>
+						<%= link_to "Delete", food_place_path(@food_place), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }%>
+					<% end %>
+		 		<% end %></p>
+		 		<% if user_signed_in? %>
+		 		<div class='write-review btn btn-primary'>Write a Review</div>
+		 		<br><br>
+		 		<div class='review-form'>
+		 		 <%= render partial: 'reviews/form' %>
+		 		</div>
+		 		<% else %>
+		 		<div><%= link_to 'Signin to Write a Review', new_user_session_path, class: 'btn btn-primary' %></div>
+	 		<% end %>
 		</div>
-		<p>
-				  <%= @food_place.about %>
-			</p>
-			<% if user_signed_in? %>
-				<% if (@food_place.user == current_user) || (current_user.admin?)%>
-					<%= link_to 'Edit', edit_food_place_path(@food_place), class: "btn btn-link" %> |
-					<%= link_to "Delete", food_place_path(@food_place), method: :delete, data: { confirm: 'Are you sure?' }%>
+
+		<div class='col-md-5 col-sm-4'>
+			<iframe
+				width="100%"
+				height="400"
+				frameborder="0" style="border:0"
+				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBB2gFnX3mWZNOINgVNx7lqId-Wn8sAnWY
+				  &q=<%= @food_place.address.parameterize %>&zoom=14">
+			</iframe>	
+		</div>
+	</div>
+
+	<hr>
+	 <div class="row review-wrapper">
+	  <div class='col-sm-12'>
+			<% if @reviews.blank? %>
+	 			<h3>No reviews yet. Be the first to review this food place</h3>
+	 		<% else %>
+	 			<% @reviews.in_groups_of(2) do |group| %>
+	 				<div class="row">
+	        <% group.each do |r| %>
+	          <% if r %>
+	          	<div class='col-sm-6'>
+	          		<div class="row">
+	          			<div class='col-sm-4'>
+	          				<h5>By: <%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%></h5>
+	          					<%= r.created_at.strftime("%-m/%-d/%y") %><br>
+	          					<div class='star-rating' data-score= <%= r.rating %> ></div>        
+	          			</div>
+	          			<div class='col-sm-8'>
+	          					<p><%= h(r.comment).gsub(/\n/, '<br/>').html_safe %></p>
+	          			</div>
+	          		</div>       	
+	          <div class='pull-right'>
+						 <% if user_signed_in? %>
+						 	<% if (r.user == current_user) || (current_user.admin?)%>
+						 	<%= link_to "Edit", edit_food_place_review_path(@food_place, r) %> | 
+						 	<%= link_to "Delete", food_place_review_path(@food_place, r), method: :delete, data: { confirm: 'Are you sure?' }%>
+						 	<% end %>
+						 	<% end %>
+						 	</div><br>
+						 		<hr>
+				 			</div>
+
+				 		<% end %>
+				 	<% end %>
+
+				 	</div>
 				<% end %>
 	 		<% end %>
-	 		<%= link_to "Write a Review", new_food_place_review_path(@food_place), class: 'btn btn-primary' %>
-	</div>
-
-	<div class='col-md-5 col-sm-4'>
-		<iframe
-			width="100%"
-			height="400"
-			frameborder="0" style="border:0"
-			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBB2gFnX3mWZNOINgVNx7lqId-Wn8sAnWY
-			  &q=<%= @food_place.address.parameterize %>&zoom=14">
-		</iframe>	
-	</div>
+	 	</div>
+	
+	 </div>
 </div>
-
-<br><hr><br>
- <div class="row">
-  <div class='col-sm-12'>
-		<% if @reviews.blank? %>
- 			<h3>No reviews yet. Be the first to review this food place</h3>
- 		<% else %>
- 			<% @reviews.in_groups_of(2) do |group| %>
- 				<div class="row">
-        <% group.each do |r| %>
-          <% if r %>
-          	<div class='col-sm-6'>
-          	<h4>Reviewed By: <%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%> on this day <%= r.created_at.strftime("%-m/%-d/%y") %>
-			 			</h4>
-			 			<div class='star-rating' data-score= <%= r.rating %> ></div>
-					 <p><%= h(r.comment).gsub(/\n/, '<br/>').html_safe %></p>
-
-					 <% if user_signed_in? %>
-					 	<% if (r.user == current_user) || (current_user.admin?)%>
-					 	<%= link_to "Edit", edit_food_place_review_path(@food_place, r) %>
-					 	<%= link_to "Delete", food_place_review_path(@food_place, r), method: :delete, data: { confirm: 'Are you sure?' }%>
-					 	<% end %>
-					 	<% end %>
-					 		<hr>
-			 			</div>
-			 		<% end %>
-			 	<% end %>
-			 	</div>
-			<% end %>
- 		<% end %>
- 	</div>
- </div>
-
-  
-    
-
-
-
 <script>
 	$('.star-rating').raty({
 		path: 'https://s3.amazonaws.com/foodplace/uploads/stars',
@@ -91,4 +106,8 @@
 			return $(this).attr('data-score');
 		}
 	});
+	$('.write-review').on('click', function(){
+		$('.review-form').toggle("slow");
+	  });
+	  
 </script>

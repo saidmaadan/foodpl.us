@@ -2,6 +2,9 @@ class Review < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :food_place
 
+	paginates_per 50
+	max_paginates_per 50
+
 	validates :rating, :comment, presence: true
 	validates :rating, numericality:{ 
 		only_integer: true,
