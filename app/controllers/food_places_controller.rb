@@ -5,7 +5,7 @@ class FoodPlacesController < ApplicationController
  
   def search
     if params[:search].present?
-      @food_places = FoodPlace.search(params[:search])
+      @food_places = FoodPlace.search(params[:search]).page params[:page]
     else
       @food_places = FoodPlace.all.order("created_at DESC").page params[:page]
     end
