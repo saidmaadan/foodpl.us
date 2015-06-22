@@ -1,9 +1,8 @@
 <div class='container'>
   <div class='row'>
     <div class='col-md-9 col-sm-8 clearfix'>
-      <% @food_places.in_groups_of(1) do |group| %>
         <div class="row">
-          <% group.each do |food_place| %>
+          <% @food_places.each do |food_place| %>
             <% if food_place %>
               <div class='col-sm-12'>
                 <div class='row'>
@@ -25,7 +24,6 @@
             <% end %>
           <% end %>
         </div>
-      <% end %>
       <div class='paginate'>
       <%= paginate @food_places, :outer_window => 3 %>
       </div>
