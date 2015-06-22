@@ -5,9 +5,9 @@ class FoodPlacesController < ApplicationController
  
   def search
     if params[:search].present?
-      @food_places = FoodPlace.search(params[:search]),page params[:page], per_page: 4
+      @food_places = FoodPlace.search(params[:search])
     else
-      @food_places = FoodPlace.all.order("created_at DESC")
+      @food_places = FoodPlace.all.order("created_at DESC").page params[:page]
     end
     @reviews = Review.all.order("created_at DESC").limit(2)
   end
