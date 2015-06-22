@@ -9,9 +9,9 @@
         <span class="icon-bar"></span>
       </button>
       <% if user_signed_in? %>
-      <%= link_to 'FoodPlace', search_food_places_path, class: 'navbar-brand' %>
+      <%= link_to 'FoodPlus', search_food_places_path, class: 'navbar-brand hidden-sm' %>
       <% else %>
-      <%= link_to 'FoodPlace', root_path, class: 'navbar-brand' %>
+      <%= link_to 'FoodPlus', root_path, class: 'navbar-brand hidden-sm' %>
       <% end %>
     </div>
 
@@ -30,17 +30,24 @@
       <ul class="nav navbar-nav navbar-right">
      
         <% if user_signed_in? %>
-         <li><%= link_to 'Add Restaurant', new_food_place_path %></li>
-          <li><%= link_to current_user.first_name, edit_user_registration_path %></li>
-          <li><%= link_to 'Signout', destroy_user_session_path, method: :delete %></li>
+         <li><%= link_to 'Add Restaurant', new_food_place_path, class: 'hidden-sm' %></li>
+          <li><%= link_to current_user.first_name, edit_user_registration_path, class: 'hidden-sm' %></li>
+          <li><%= link_to 'Signout', destroy_user_session_path, method: :delete, class: 'hidden-sm' %></li>
+
+           <li class="dropdown hidden-lg hidden-md hidden-xs">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MENU<span class="caret"></span></a>
+          <ul class="dropdown-menu ">
+            <li><%= link_to 'Add Restaurant', new_food_place_path %></li>
+            <li><%= link_to current_user.first_name, edit_user_registration_path %></li>
+            <li><%= link_to 'Signout', destroy_user_session_path, method: :delete%></li>
+            </ul>
+        </li>
           <% else %>
           <li><%= link_to 'Register', new_user_registration_path %></li>
           <li><%= link_to 'Signin', new_user_session_path %></li>
-          <% end %>
         
-        
-          </ul>
-        </li>
+          
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

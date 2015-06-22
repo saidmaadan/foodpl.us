@@ -31,7 +31,7 @@
     <div class='col-md-3 col-sm-4 clearfix'>
        <h2>Review of the Day</h2>
            <% @reviews.each do |r| %>
-             <h5><%= "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}. "%> reviewed <%= link_to r.food_place.name, r.food_place %></h5>
+             <h5><%= link_to "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}.", r.user %> reviewed <%= link_to r.food_place.name, r.food_place %></h5>
               <%= r.created_at.strftime("%-m/%-d/%y") %><br>
               <div class='star-rating' data-score= <%= r.rating %> ></div>      
              <p><%= h(r.comment).gsub(/\n/, '<br/>').html_safe %></p>

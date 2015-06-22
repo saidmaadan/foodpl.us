@@ -9,7 +9,7 @@ class FoodPlacesController < ApplicationController
     else
       @food_places = FoodPlace.all.order("created_at DESC").page params[:page]
     end
-    @reviews = Review.all.order("created_at DESC").limit(2)
+    @reviews = Review.all.order("created_at DESC").limit(3)
   end
   # .page params[:page], per_page: 4
   # GET /food_places

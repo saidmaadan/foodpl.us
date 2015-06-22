@@ -1,5 +1,7 @@
 <div class='container'>
 <h3>User</h3>
+<%= image_tag @user.image_url%>
+
 <p>Name: <%= @user.first_name if @user.first_name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 <p>Email: <%= @user.nickname if @user.email %></p>
