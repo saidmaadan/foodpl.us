@@ -18,7 +18,7 @@
   </div>
   <div class="form-group">
     <%= f.label :about %><br>
-    <%= f.text_area :about, class: "form-control", placeholder: "Brief introduction and description about restaurant" %>
+    <%= f.text_area :about, class: "form-control", cols: 40, rows: 7, placeholder: "Brief introduction and description about restaurant" %>
   </div>
   <div class="form-group">
     <%= f.label :address %><br>
@@ -37,6 +37,6 @@
     <%= f.file_field :image, class: "form-control"  %>
   </div>
   <div class="actions">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary" %> <%= link_to "Cancel", search_food_places_path, class: 'btn btn-default' %>
   </div>
 <% end %>

@@ -24,7 +24,7 @@ class FoodPlacesController < ApplicationController
   # GET /food_places/1
   # GET /food_places/1.json
   def show
-    @reviews = Review.where(food_place_id: @food_place.id).order("created_at DESC").page params[:page]
+    
     @review = Review.new
     @review.food_place_id = @food_place_id
     if @reviews.blank?
@@ -32,13 +32,15 @@ class FoodPlacesController < ApplicationController
     else
       @avg_rating = @reviews.average(:rating).round(2)
     end
+    @reviews = Review.where(food_place_id: @food_place.id).order("created_at DESC").page params[:page]
+    @food_places = FoodPlace.all.order("created_at DESC").limit(3)
   end
   
 
   # GET /food_places/new
   def new
     @food_place = FoodPlace.new
-    @food_places = FoodPlace.all.order("created_at DESC").limit(2)
+    @food_places = FoodPlace.all.order("created_at DESC").limit(3)
   end
 
   # GET /food_places/1/edit
