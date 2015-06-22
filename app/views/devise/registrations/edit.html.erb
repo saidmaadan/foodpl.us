@@ -37,6 +37,44 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
     <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
+  <div class="form-group">
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :gender %>
+    <%= f.text_field :gender, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :headline %>
+    <%= f.text_field :headline, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :about %>
+    <%= f.text_area :about, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :social %>
+    <%= f.text_field :social, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :location %>
+    <%= f.text_field :location, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :website %>
+    <%= f.text_field :website, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :favorite_website %>
+    <%= f.text_field :favorite_website, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
 
   <div class="form-group">
     <%= f.submit "Update",class: "btn btn-success" %>

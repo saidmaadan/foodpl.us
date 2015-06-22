@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620171720) do
+ActiveRecord::Schema.define(version: 20150622042315) do
 
   create_table "food_places", force: true do |t|
     t.string   "name"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20150620171720) do
     t.boolean  "admin",                  default: false
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "nickname"
+    t.string   "gender"
+    t.string   "headline"
+    t.text     "about"
+    t.string   "social"
+    t.string   "location"
+    t.string   "website"
+    t.string   "favorite_website"
+    t.string   "image"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
