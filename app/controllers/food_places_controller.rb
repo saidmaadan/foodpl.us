@@ -39,7 +39,6 @@ class FoodPlacesController < ApplicationController
   # GET /food_places/new
   def new
     @food_place = FoodPlace.new
-    @food_places = FoodPlace.all.order("created_at DESC").limit(3)
   end
 
   # GET /food_places/1/edit
