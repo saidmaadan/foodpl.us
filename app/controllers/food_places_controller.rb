@@ -14,7 +14,7 @@ class FoodPlacesController < ApplicationController
   # .page params[:page], per_page: 4
   # GET /food_places
   # GET /food_places.json
-  def index
+  def index 
     @food_places = FoodPlace.all.order("created_at DESC").limit(6)
   end
 
@@ -24,7 +24,6 @@ class FoodPlacesController < ApplicationController
   # GET /food_places/1
   # GET /food_places/1.json
   def show
-    
     @review = Review.new
     @review.food_place_id = @food_place_id
     if @reviews.blank?

@@ -100,13 +100,15 @@
 						<% end %>
 					<% end %>
 					<div style='text-align:center;'>
-		 		<%= paginate @reviews, :outer_window => 3 %> </div>     	
-		 			<hr>
-		 		</div>
+			 			<%= paginate @reviews, :outer_window => 3 %> </div>     	
+			 		</div>
 		 		<div class='col-sm-1'></div>
 		 	<!-- </div> -->
 		 <div class='col-sm-4'>
 		 	 <div class='row'>
+		 	  <% if @reviews.blank? %>
+		 			<h3></h3>
+		 		<% else %>
 		 	 <h3>Recent List</h3><hr>
           <% @food_places.each do |food_place| %>
             <% if food_place %>
@@ -125,7 +127,8 @@
                    <hr>
                 <% end %>
                  <% end %>
-                 
+                <% end %>
+                  
               </div>
 		 </div>
 		

@@ -1,5 +1,91 @@
 <div class='container'>
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<div class='row'>
+<div class='col-sm-1'></div>
+<div class='col-sm-10'>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="#dash" aria-controls="dash" role="tab" data-toggle="tab">Dashboard</a></li>
+    <li role="presentation" class="active"><a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">Account Setting</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+     
+    <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">About Me</a></li>
+  </ul></div>
+  <div class='col-sm-1'></div>
+  </div>
+  <br>
+
+  <div class='row'>
+  <div class='col-sm-1'></div>
+  <div class='col-sm-4'>
+  <div class='row'>
+    <div class='col-sm-5'>
+      <%= image_tag @user.image_url, class: 'img-responsive', style: 'width: 100%;height:120px;border-radius:20%;'%>
+    </div>
+    <div class='col-sm-7'><br>
+      <h4><%= "#{@user.first_name.capitalize} #{@user.last_name.capitalize[0]}." %>'s Profile</h4>
+      <h4>FoodPl.us since</h4>
+       <span> <%= @user.created_at.strftime("%B %Y") %></span>
+    </div>
+  </div><br>
+  <p>
+  <% if @user.nickname %>
+  You can call me:<br> <%= @user.nickname %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.location %>
+  Location: <%= @user.location %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.headline %>
+  <%= @user.headline %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.website %>
+  My Blog: <br><%= link_to @user.website, @user.website, target: '_blank' %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.favorite_website %>
+  Site I love: <br><%= link_to @user.favorite_website, @user.favorite_website, target: '_blank' %>
+  <% end %><br>
+  <p>
+
+    <% if @user.about %>
+    About Me:<br> <%= truncate(@user.about, length: 40, seperate: '') %>
+    <% end %><br>
+  </p>
+  <p>
+  <% if @user.social %>
+  You can also find me at: <br><%= @user.social %>
+  <% end %><br>
+  </p>
+
+  </div>
+  <div class='col-sm-6'>
+    <div class="tab-content">
+    <div role="tabpanel" class="tab-pane" id="dash"><p>
+    <% if @user.website %>
+  <strong>My Blog:</strong> <br><%= link_to @user.website, @user.website, target: '_blank' %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.favorite_website %>
+  <strong>Site I love:</strong> <br><%= link_to @user.favorite_website, @user.favorite_website, target: '_blank' %>
+  <% end %><br>
+  <p>
+
+    <% if @user.about %>
+    <strong>Get to know me:</strong><br><%= @user.about %>
+    <% end %><br>
+  </p>
+    </p>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="setting"><p>
+<!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
+<h3>Update your account info</h3><br>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -37,31 +123,40 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
     <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
+ 
   <div class="form-group">
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname, class: 'form-control' %>
+    <%= f.submit "Update",class: "btn btn-info" %>
   </div>
+<% end %>
+
+<% if current_user.admin? %>
+
+<h5>Cancel my account</h5>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
+<% end %>
+<!-- </%=// link_to "Back", :back %> -->
+</p></div>
+    
+<div role="tabpanel" class="tab-pane" id="profile"><p> 
+  <!--  <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
+  <h3>Update your profile</h3><br>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+
   <div class="form-group">
-    <%= f.label :gender %>
-    <%= f.text_field :gender, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :headline %>
-    <%= f.text_field :headline, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :about %>
-    <%= f.text_area :about, class: 'form-control' %>
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= f.label :social %>
     <%= f.text_field :social, class: 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= f.label :location %>
-    <%= f.text_field :location, class: 'form-control' %>
-  </div>
+  
   <div class="form-group">
     <%= f.label :website %>
     <%= f.text_field :website, class: 'form-control' %>
@@ -77,13 +172,73 @@
   </div>
 
   <div class="form-group">
-    <%= f.submit "Update",class: "btn btn-success" %>
+    <%= f.submit "Update",class: "btn btn-info" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
+</p>.</div>
 
-<%= link_to "Back", :back %>
+<div role="tabpanel" class="tab-pane" id="about"><p>
+<!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
+<h3>Update your about you page</h3><br>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+   <div class="form-group">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :gender %>
+    <%= f.text_field :gender, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :headline %>
+    <%= f.text_field :headline, class: 'form-control' %>
+  </div>
+   <div class="form-group">
+    <%= f.label :location %>
+    <%= f.text_field :location, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :about %>
+    <%= f.text_area :about, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Update",class: "btn btn-info" %>
+  </div>
+<% end %>
+</p></div>
+
 </div>
+</div>
+  <div class='col-sm-1'></div>
+</div>
+
+
+</div>
+
+
+<script>
+  $('.star-rating').raty({
+    path: 'https://s3.amazonaws.com/foodplace/uploads/stars',
+    readOnly: true,
+    score: function(){
+      return $(this).attr('data-score');
+    }
+  });
+  $('.write-review').on('click', function(){
+    $('.review-form').toggle("slow");
+    });
+    
+</script>
+

@@ -1,16 +1,137 @@
 <div class='container'>
-<h3>User</h3>
-<%= image_tag @user.image_url%>
+<div class='row'>
+<div class='col-sm-1'></div>
+<div class='col-sm-10'>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#dash" aria-controls="dash" role="tab" data-toggle="tab">Dashboard</a></li>
+    
+     <li role="presentation"><a href="#list" aria-controls="list" role="tab" data-toggle="tab">Lists</a></li>
+    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+   
+    
+  </ul></div>
+  <div class='col-sm-1'></div>
+  </div>
+  <br>
 
-<p>Name: <%= @user.first_name if @user.first_name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
-<p>Email: <%= @user.nickname if @user.email %></p>
-<p>Email: <%= @user.gender if @user.nickname %></p>
-<p>Email: <%= @user.headline if @user.headline %></p>
-<p>Email: <%= @user.about if @user.about %></p>
-<p>Email: <%= @user.social if @user.social %></p>
-<p>Email: <%= @user.location if @user.location %></p>
-<p>Email: <%= @user.website if @user.website %></p>
-<p>Email: <%= @user.favorite_website if @user.favorite_website %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<div class='row'>
+<div class='col-md-1'></div>
+	<div class='col-md-3 col-sm-4'>
+		<div class='row'>
+    <div class='col-sm-4 col-xs-5'>
+      <%= image_tag @user.image_url, class: 'img-responsive', style: 'width: 100%;height:80px;border-radius:20%;'%>
+    </div>
+    <div class='col-sm-8 col-xs-7'>
+      <h4><%= "#{@user.first_name.capitalize} #{@user.last_name.capitalize[0]}." %>'s Profile</h4>
+      <h4>FoodPl.using since</h4>
+       <span> <%= @user.created_at.strftime("%B %Y") %></span>
+    </div>
+  </div><br>
+  <p>
+  <% if @user.nickname %>
+  You can call me:<br> <%= @user.nickname %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.location %>
+  Location: <%= @user.location %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.headline %>
+  <%= @user.headline %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.website %>
+  My Blog: <br><%= link_to @user.website, @user.website, target: '_blank' %>
+  <% end %><br>
+  </p>
+  <p>
+  
+  <p>
+  <% if @user.social %>
+  You can also find me at: <br><%= @user.social %>
+  <% end %><br>
+  </p>
+	</div>
+	<div class='col-md-7 col-sm-8'>
+		<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="dash"><p>
+    <p>
+    <% if @user.website %>
+  <strong>My Blog:</strong> <br><%= link_to @user.website, @user.website, target: '_blank' %>
+  <% end %><br>
+  </p>
+  <p>
+  <% if @user.favorite_website %>
+  <strong>Site I love:</strong> <br><%= link_to @user.favorite_website, @user.favorite_website, target: '_blank' %>
+  <% end %><br>
+  <p>
+
+    <% if @user.about %>
+    <strong>Get to know me:</strong><br><%= @user.about %>
+    <% end %><br>
+  </p>
+
+</p></div>
+    
+<div role="tabpanel" class="tab-pane" id="list"><p>
+ <% if @food_places.any? %>
+    <h4 >My recent added Restaurants</h4>
+    <% @food_places.each do |food_place| %>
+          <% if food_place %>
+          <div class='row'>
+          	<div class='col-sm-3 col-xs-5'><br>
+          		<%= image_tag food_place.image_url, class: 'img-responsive', style:"width:100%;height:140px;" %>
+          	</div>
+          	<div class='col-sm-4 col-xs-7'>
+          		<h4><%= link_to food_place.name, food_place %></h4>
+								<div class='star-rating' data-score= <%= @avg_rating %> ></div>
+								<%= pluralize("#{@reviews.length}", "review") %><br>
+								  <%= food_place.address %><br> 
+								  <%= food_place.phone %><br>
+							  <%= link_to food_place.website, food_place.website, target:'_blank'%>
+							
+          	</div>
+          	<div class='col-sm-5 col-xs-12'><br>
+          		 <%= truncate(food_place.about, length:200, seperator: '') %>
+          	</div>
+          </div>
+            
+           
+    		<% end %>
+    	<% end %>
+    	<hr>
+    	<% else %>
+    	<h3>You have not listed any restaurants</h3>
+    <% end %>
+</p>.</div>
+    <div role="tabpanel" class="tab-pane" id="reviews"><p>
+   
+
+
+</p>.</div>
+  
+  </div>
+	</div>
+	<div class='col-md-1'></div>
 </div>
+
+
+</div>
+
+
+<script>
+	$('.star-rating').raty({
+		path: 'https://s3.amazonaws.com/foodplace/uploads/stars',
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+		}
+	});
+	$('.write-review').on('click', function(){
+		$('.review-form').toggle("slow");
+	  });
+	  
+</script>

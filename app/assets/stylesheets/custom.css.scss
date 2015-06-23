@@ -39,6 +39,18 @@
 		}
 	}
 }
+.login-hide{
+	width: 60%;
+	margin: auto;
+}
+.login-review{
+	display: none;
+}
+
+.home-page h2{
+	color: #68b9ea;
+	font-weight: 900;
+}
 
 .navbar-default .navbar-collapse{
   border-color: red;
@@ -124,4 +136,15 @@ footer{
 }
 .review-form{
 	display: none;
+}
+
+a {
+  color: #68b9ea;
+}
+a:hover {
+  color: #CD6960;
+  text-decoration: none;
+}
+.search h2{
+	color: #296294;
 }
