@@ -51,16 +51,7 @@ html, body{
 		}
 	}
 }
-.login-hide{
-	width: 60%;
-	margin: auto;
-}
-.login-review{
-	display: none;
-}
-.home-page{
-	margin-bottom: 40px;
-}
+
 .home-page h2{
 	color: #68b9ea;
 	font-weight: 900;
@@ -113,11 +104,28 @@ html, body{
 	overflow: auto;
 }
 
+.login-hide, .login-hides{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.login-review{
+	display: none;
+}
+.login-reviews{
+	display: none;
+}
+.home-page{
+	margin-bottom: 40px;
+}
+
 .login-form{
 	text-align: center;
 	margin: auto;
 }
-
+.new-form{
+	margin-top: 50px;
+}
 .new-form h1{
 	color: #68b9ea;
 	font-weight: 900;
@@ -127,6 +135,7 @@ html, body{
 .new-form h2{
 	color: #296294;
 	font-weight: 900;
+	margin-top: 30px;
 	
 }
 

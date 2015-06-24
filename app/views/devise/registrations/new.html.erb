@@ -1,68 +1,17 @@
 <div class='container'>
   <div class='row new-form'>
+
     <h1>Sign up for free Membership</h1>
     <div class="col-md-1"></div>
-    <div class="col-md-6 col-sm-7">
-       <h2>Create Your Acount</h2>
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-
-    <div class="form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.submit "Sign up", class: "btn btn-info" %>
-    </div>
-  <% end %>
-
-  
-    </div>
-    <div class="col-md-4 col-sm-5">
-    <h2>As a Member You Can:</h2><br>
-    <h4><i class="fa fa-check-square-o"></i> Search for a local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Add your own local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Add a visited local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Add your favorite local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Post a review </h4>
-    </div>
- 
-  <div class="col-md-1"></div>
-  </div>
-  <div class='row'>
-    <div class="col-md-4 col-sm-2"></div>
-    <div class="col-md-4 col-sm-8">
-  <div class='login-hide btn btn-info btn-lg'>Click Here to Login</div>
+   
+    <div class="col-md-3 col-sm-4">
+       <div class='login-hide btn btn-info btn-lg'>Login to your Account</div>
         <br>
         <div class='login-review'>
          
         
-      <h2>Log in</h2>
+      <h2>
+      </h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-group">
@@ -90,14 +39,75 @@
  
     </div>
     </div>
-    <div class="col-md-4 col-sm-2"></div>
+     <div class="col-md-4 col-sm-4">
+    <h2>As a Member You Can:</h2><br>
+    <h4><i class="fa fa-check-square-o"></i> Search for a local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Add your own local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Add a visited local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Add your favorite local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Post a review </h4>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <div class='login-hides btn btn-warning btn-lg'>Register a new Account</div>
+     
+      <div class='login-reviews'>
+       <h2></h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "Sign up", class: "btn btn-info" %>
+        </div>
+      <% end %>
+    </div>
+    </div>
+    
+ 
   </div>
+ 
 
 </div>
 
 <script>
-$('.login-hide').on('click', function(){
-    $('.login-review').toggle("slow");
-    });
+  $('.login-hide').on('click', function(){
+  $('.login-reviews').hide("slow");
+  $('.login-review').toggle("slow");
+
+  });
+  $('.login-hides').on('click', function(){
+  $('.login-reviews').toggle("slow");
+  $('.login-review').hide("slow");
+
+  });
+    
     
 </script>
