@@ -1,3 +1,6 @@
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
+
 *{
 	margin: 0;
 }
@@ -55,7 +58,9 @@ html, body{
 .login-review{
 	display: none;
 }
-
+.home-page{
+	margin-bottom: 40px;
+}
 .home-page h2{
 	color: #68b9ea;
 	font-weight: 900;
@@ -108,11 +113,38 @@ html, body{
 	overflow: auto;
 }
 
+.login-form{
+	text-align: center;
+	margin: auto;
+}
+
+.new-form h1{
+	color: #68b9ea;
+	font-weight: 900;
+	text-align: center;
+}
+
+.new-form h2{
+	color: #296294;
+	font-weight: 900;
+	
+}
+
+.new-form h4{
+	color: #c3e2f4;
+	font-weight: 900;
+	
+}
+.new-form .fa {
+	color: #bb0d03;
+		
+}
+
 footer, .push{
   height: 70px;
   width: 100%;
   color: #0E7480;
-  margin-top: 90px;
+  
   bottom: 0;
   left: 0;
   background-image: url('https://s3.amazonaws.com/foodplace/uploads/food_place/image/img/food-f.png') repeat center center fixed,

@@ -1,8 +1,9 @@
 <div class='container'>
-  <div class='row'>
+  <div class='row new-form'>
+    <h1>Sign up for free Membersship</h1>
     <div class="col-md-1"></div>
     <div class="col-md-6 col-sm-7">
-       <h2>Sign up</h2>
+       <h2>Create Your Acount</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
@@ -42,9 +43,21 @@
 
   
     </div>
-    <div class="col-md-4 col-sm-5"><br>
-
-    <div class='login-hide btn btn-info btn-lg'>Click Here to Login</div>
+    <div class="col-md-4 col-sm-5">
+    <h2>As a Member You Can:</h2><br>
+    <h4><i class="fa fa-check-square-o"></i> Search for a local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Add your own local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Add a visited local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Add your favorite local restaurant </h4>
+    <h4><i class="fa fa-check-square-o"></i> Post a review </h4>
+    </div>
+ 
+  <div class="col-md-1"></div>
+  </div>
+  <div class='row'>
+    <div class="col-md-4 col-sm-2"></div>
+    <div class="col-md-4 col-sm-8">
+  <div class='login-hide btn btn-info btn-lg'>Click Here to Login</div>
         <br>
         <div class='login-review'>
          
@@ -76,10 +89,10 @@
 
  
     </div>
+    </div>
+    <div class="col-md-4 col-sm-2"></div>
   </div>
- 
-  <div class="col-md-1"></div>
-  </div>
+
 </div>
 
 <script>
