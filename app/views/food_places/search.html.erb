@@ -37,7 +37,11 @@
            <% @reviews.each do |r| %>
            <div class='row'>
              <div class='col-xs-4'>
+             <% if r.user.image_url %>
                <%= image_tag r.user.image_url, class: 'img-responsive', style:"width:100%;height:50px" %>
+               <% else %>
+                <i class="fa fa-user fa-4x" ></i>
+              <% end %>
              </div>
              <div class='col-xs-8'>
                 <%= link_to "#{r.user.first_name.capitalize} #{r.user.last_name.capitalize[0]}.", r.user %> reviewed <%= link_to r.food_place.name, r.food_place %>
