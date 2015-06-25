@@ -1,7 +1,16 @@
 <div class='container'>
   <div class='row new-form'>
     <div class="col-md-1"></div>
-    <div class="col-md-5 col-sm-6"><br>
+    <div class="col-md-5 col-sm-6 col-xs-12 pull-right"><br>
+      <h2>When You Login You Can:</h2><br>
+      <h4><i class="fa fa-check-square-o"></i> Search for a local restaurant </h4>
+      <h4><i class="fa fa-check-square-o"></i> Add your own local restaurant </h4>
+      <h4><i class="fa fa-check-square-o"></i> Add a visited local restaurant </h4>
+      <h4><i class="fa fa-check-square-o"></i> Add your favorite local restaurant </h4>
+      <h4><i class="fa fa-check-square-o"></i> Post a review </h4>
+    </div>
+    
+    <div class="col-md-5 col-sm-6 col-xs-12"><br>
       <h2>Login to your Account</h2>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -29,15 +38,8 @@
 
       <%= render "devise/shared/links" %>
     </div>
-    <div class="col-md-5 col-sm-6"><br>
-      <h2>When You Login You Can:</h2><br>
-    <h4><i class="fa fa-check-square-o"></i> Search for a local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Add your own local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Add a visited local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Add your favorite local restaurant </h4>
-    <h4><i class="fa fa-check-square-o"></i> Post a review </h4>
-    </div>
-    <div class="col-md-1"></div>
+    
+   <!--  <div class="col-md-1"></div> -->
   </div>
    
 </div>
