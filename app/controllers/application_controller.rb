@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :nickname
     devise_parameter_sanitizer.for(:account_update) << :gender
     devise_parameter_sanitizer.for(:account_update) << :headline
-    devise_parameter_sanitizer.for(:account_update) << :labout
     devise_parameter_sanitizer.for(:account_update) << :social
     devise_parameter_sanitizer.for(:account_update) << :location
     devise_parameter_sanitizer.for(:account_update) << :website

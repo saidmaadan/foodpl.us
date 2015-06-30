@@ -106,7 +106,12 @@
     	<% else %>
     	<h3>You have not listed any restaurants</h3>
     <% end %>
-</p>.</div>
+</p>.
+ <div class='paginate'>
+      <%= paginate @food_places, :outer_window => 3 %>
+      
+      </div>
+</div>
     <div role="tabpanel" class="tab-pane" id="reviews"><p>
    
 

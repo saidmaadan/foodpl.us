@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	mount_uploader :image, ImageUploader
+	paginates_per 3
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
