@@ -88,7 +88,7 @@ class FoodPlacesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_food_place
-      @food_place = FoodPlace.find(params[:id])
+      @food_place = FoodPlace.friendly.find(params[:id])
     end
 
     def check_user

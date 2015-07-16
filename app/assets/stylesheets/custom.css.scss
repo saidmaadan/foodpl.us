@@ -203,3 +203,15 @@ a:hover {
 .search h2{
 	color: #296294;
 }
+
+.navbar-form .navbar-left{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.navbar-default .navbar-collapse {
+  border-color:#68b9ea;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #68b9ea;
+}

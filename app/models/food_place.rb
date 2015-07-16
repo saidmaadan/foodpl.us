@@ -1,6 +1,7 @@
 class FoodPlace < ActiveRecord::Base
 	mount_uploader :image, ImageUploader
-
+	extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
 	searchkick
 	paginates_per 4
 	max_paginates_per 4
@@ -16,4 +17,12 @@ class FoodPlace < ActiveRecord::Base
     validates :address, format: { with: /\A\d+[^,]+,[^,]+, [A-Z]{2} \d{5}\z/,
     message: "must be in the format: 706 Congress Avenue, Austin, TX 78701" }
 
+
+  def slug_candidates
+    [
+      :name,
+      [:name, :phone],
+      [:name, :phone, :address]
+    ]
+	end
 end

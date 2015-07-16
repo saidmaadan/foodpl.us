@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @reviews = @user.reviews
     @food_places = @user.food_places.order("created_at DESC").page params[:page]
     # unless @user == current_user
