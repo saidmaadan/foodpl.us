@@ -52,7 +52,7 @@ class ReviewsController < ApplicationController
     end
 
     def set_food_place
-      @food_place = FoodPlace.find(params[:food_place_id])
+      @food_place = FoodPlace.friendly.find(params[:food_place_id])
     end
 
     def check_user
