@@ -19,5 +19,24 @@ module Restaurant
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    ActionMailer::Base.smtp_settings = {
+    :address => 'smtp.sendgrid.net',
+    :port => '587',
+    :authentication => :login,
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :domain => 'heroku.com',
+    :enable_startstls_auto => true
+}
+
+#     ActionMailer::Base.smtp_settings = {
+#     :address => 'smtp.gmail.com',
+#     :port => '587',
+#     :authentication => :login,
+#     :user_name => ENV['GMAIL_USERNAME'],
+#     :password => ENV['GMAIL_PASSWORD'],
+#     :domain => 'mail.google.com',
+#     :enable_startstls_auto => true
+# }
   end
 end

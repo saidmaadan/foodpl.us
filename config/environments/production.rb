@@ -77,5 +77,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Required for Devise gem. remember to change URL localhost to application production URL
-  config.action_mailer.default_url_options = { host: 'http://www.foodpl.us/' } 
+  config.action_mailer.default_url_options = { host: 'http://www.foodpl.us' }
+  config.action_mailer.delivery_method = :smtp 
 end
