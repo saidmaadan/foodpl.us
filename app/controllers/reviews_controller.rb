@@ -18,6 +18,7 @@ class ReviewsController < ApplicationController
     @review.food_place_id = @food_place.id
     respond_to do |format|
       if @review.save
+        ReviewMailer.review_created(current_user, @food_place.user, @review.comment).deliver
         format.html { redirect_to @food_place, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
