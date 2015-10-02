@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FoodPl.us | Add and Search for local restaurant</title>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "FoodPl.us: Add and Search for local restaurant" %></title>
+    <meta name="keywords" content="<%= content_for?(:keywords) ? yield(:keywords) : "restaurant reviews, restaurant app, restaurant locator, restaurant search, food finder, restaurant listings" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "All inclusive site for restaurant. Find, search and list restaurant web app. " %>">
+    <meta name="author" content="Said Maadan">
   <%= render 'layouts/bootstrap'%>  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
+  <%= favicon_link_tag 'https://s3.amazonaws.com/inventivelabs/jobinbox/logos/favicon5.ico' %>
 </head>
 <body>
 <%= render 'layouts/navbar'%>
